@@ -1,7 +1,7 @@
 var assert = require('assert');
 var expect = require('chai').expect;
 
-describe('webdriver.io page', function() {
+describe('webdriver.io api page', function() {
     it('should be able to filter for commands', function () {
         browser.url('/api.html');
 
@@ -20,12 +20,6 @@ describe('webdriver.io page', function() {
         results[1].click();
         expect($('.doc h1').getText()).to.be.equal('GETTEXT');
 	});
-	
-	it('should have the right title - the fancy generator way', function () {
-        browser.url('http://webdriver.io');
-        var title = browser.getTitle();
-        assert.equal(title, 'WebdriverIO - WebDriver bindings for Node.js');
-    });
 });
 
 describe('DuckDuckGo search', function() {
