@@ -1,19 +1,17 @@
-// (c) Copyright 1994-2018 EntIT Software LLC
-(function() {
 
+exports.systest_server = function() {
 	"use strict";
 
 	var taskHungThreshhold = 200;  //task step not update state for 120 seconds, will be regarded as hung
-
+	var http = require('http');
+	var app = require('./app');
+	var server = http.createServer(app);
+	var io = require('socket.io').listen(server,{ log: false });
 	var fs = require('fs');
 	var XML = require('xml');
 	var path = require('path');
-	var http = require('http');
-	var app = require('express')();
-	var server = http.createServer(app);
-	var io = require('socket.io').listen(server,{ log: false });
-	var execFile = require('child_process').execFile;
 	var spawn = require('child_process').spawn;
+	var execFile = require('child_process').execFile;
 	var config = require('./systest_config');
 
 	var lastPid = 0;
@@ -1244,4 +1242,4 @@
 	// In favor of TCB 50.0 and old FF, add components folder to path.
 	process.env.PATH = baseDir + "TCBProfiles\\RRE\\components;" + baseDir + "TCNMProfiles\\RRE\\components;" + process.env.PATH;
 	launchClients();
-})();
+}
